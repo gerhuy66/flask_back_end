@@ -10,8 +10,8 @@ model_path = app_context.root_path+"\\service\\haystack\\bert-multi-cased-finetu
 
 from requests_aws4auth import AWS4Auth
 service = 'es'
-access_key = 'AKIAXYZRVWASFJT4DGP7'
-serect_key = '0aZ9MB6OIiELdf4JJQ61Z4cg8MXo3yBlPGKm+9RR'
+access_key = ''
+serect_key = ''
 region = 'ap-southeast-1'
 awsauth = AWS4Auth(access_key, serect_key,region,service)
 
