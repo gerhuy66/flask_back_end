@@ -1,0 +1,4 @@
+huyenv
+.vscode
+__pycache__
+app/service/haystack/bert-multi-cased-finetuned-xquadv1/
