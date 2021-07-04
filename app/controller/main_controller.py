@@ -109,6 +109,7 @@ def addDocument():
     return ""
 
 
+#get image
 @app.route('/getImage/<imageNm>',methods=['GET'])
 def get_image(imageNm):
     current_dir = os.getcwd()
