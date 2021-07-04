@@ -92,6 +92,18 @@ def deleteDocument():
         return make_response(jsonify({'status':200,'result':{"deleted":"fail","message":"delete fail!"}}))
     return make_response(jsonify({'status':200,'result':{"deleted":"success","message":"delete successfull!"}}))
 
+@app.route('/searchText',methods=['GET','POST'])
+def searchText():
+    query = "sinh viên"
+    try:
+       query = request.json['haystackData']
+    except:
+        print("haystackData null")
+
+    res = cv_search_haystack.search_document(query)
+    return make_response(jsonify({'status':200,'result':res}))
+
+
 @app.route('/addDocument',methods=['post'])
 def addDocument():
     return ""
