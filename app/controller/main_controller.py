@@ -107,3 +107,13 @@ def searchText():
 @app.route('/addDocument',methods=['post'])
 def addDocument():
     return ""
+
+
+@app.route('/getImage/<imageNm>',methods=['GET'])
+def get_image(imageNm):
+    current_dir = os.getcwd()
+    # path = request.json['filename']
+    # path = os.path.join(os.getcwdb(), "\\CV_PDF\\"+filename)
+    uploads = os.path.join(app.root_path.replace("\\app",""), "CV_IMG")
+    uploads = os.path.join(uploads,imageNm)
+    return send_file(uploads, mimetype='image/jpg')
