@@ -1,4 +1,9 @@
+.gitignore
 huyenv
+CV_PDF
+CV_IMG
 .vscode
 __pycache__
 app/service/haystack/bert-multi-cased-finetuned-xquadv1/
+app/service/haystack/__init__.py
+app/service/elastic/__init__.py
