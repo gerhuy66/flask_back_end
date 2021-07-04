@@ -1,5 +1,5 @@
 artifact_uri: file:///D:/study/DUANCNTT2/CV_SEARCH_FLASK_SOURCECODE/back_end_flask/mlruns/0/7aae56f451b2408f927eafa6ce01c6de/artifacts
-end_time: null
+end_time: 1625383601691
 entry_point_name: ''
 experiment_id: '0'
 lifecycle_stage: active
@@ -10,6 +10,6 @@ source_name: ''
 source_type: 4
 source_version: ''
 start_time: 1625381631577
-status: 1
+status: 3
 tags: []
 user_id: Admin
