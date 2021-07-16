@@ -42,7 +42,7 @@ def search_advance():
     "size":3000,
     "query": {
         "bool": {
-          "should": conditions
+          "must": conditions
             }
         }
     }
