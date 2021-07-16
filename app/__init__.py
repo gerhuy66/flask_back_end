@@ -8,6 +8,10 @@ from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__,static_url_path='/static')
+UPLOAD_FOLDER = 'uploadhandle'
+ALLOWED_EXTENSIONS = {'pdf'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
