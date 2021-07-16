@@ -31,7 +31,7 @@ def search_cv(query):
 def search_document(query):
     retriever = ElasticsearchRetriever(document_store=document_store)
     pipe = DocumentSearchPipeline(retriever=retriever)
-    rs = pipe.run(query=query)
+    rs = pipe.run(query=query,top_k_retriever=20)
     docs = rs.get('documents')
     results = []
     for an in docs:

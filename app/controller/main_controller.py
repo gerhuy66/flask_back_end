@@ -39,7 +39,7 @@ def search_advance():
         conditions.append({"match":{key:request.json[key]}})
     body = {
     "from":0,
-    "size":100,
+    "size":3000,
     "query": {
         "bool": {
           "should": conditions
@@ -70,6 +70,44 @@ def download_file(pdffile):
     uploads = os.path.join(app.root_path.replace("\\app",""), "CV_PDF")
     uploads = os.path.join(uploads,pdffile)
     return send_file(uploads, as_attachment=True)
+
+from app.service.elastic import index_elastic,pdf2text
+
+@app.route('/uploadpdf',methods=['POST'])
+def upload_file_and_index():
+    if 'file' not in request.files:
+        return make_response(jsonify({"status":404,"message":"Please attach file!"}))
+    files = request.files.getlist("file")
+
+    for f in files:
+        if checkCvExist(f.filename) == False:
+            return make_response(jsonify({"status":"200","result":"error","reason":"file alrady existed","duplicate_file_name":f.filename}))
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
+    pdf2text()
+    index_rs = index_elastic()
+    remove_upload_handle_files()
+    remove_upload_handle_files('uploadhandleText')
+    return make_response(jsonify({"status":200,"result":"handle success","index_result":index_rs.get('docs'),"totals":index_rs.get('totals')}))
+import shutil
+
+
+def checkCvExist(fileName):
+    cv_list = os.listdir('CV_PDF')
+    for cv in cv_list:
+        if cv == fileName:
+            return False
+    return True
+
+def remove_upload_handle_files(folder = 'uploadhandle'):
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 @app.route('/getAllDocuments/<index>/<doctype>/<infrom>/<size>',methods=['get'])
 def getAllDocuments(index,doctype,infrom,size):
