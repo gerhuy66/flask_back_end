@@ -28,7 +28,7 @@ def search_cv(query):
         result_map['prob'] = an.get('probability')
         results.append(result_map)
 
-    return results
+    return sorted(results,key=lambda k: k['prob'],reverse=True)
 
 def search_document(query):
     retriever = ElasticsearchRetriever(document_store=document_store)
