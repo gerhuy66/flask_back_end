@@ -19,11 +19,13 @@ def search_cv(query):
     pipe = ExtractiveQAPipeline(reader, retriever)
     prediction = pipe.run(query=query, top_k_retriever=5, top_k_reader=5)
     results = []
+
     for an in prediction.get('answers'):
         result_map = {}
         result_map['answer'] = an.get('answer')
         result_map['context'] = an.get('context')
         result_map['file_url'] = an.get('meta').get('name')
+        result_map['prob'] = an.get('probability')
         results.append(result_map)
 
     return results
