@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import json, render_template, request, session, \
 Response,jsonify,redirect,url_for,flash,make_response,Flask,send_file,send_from_directory
 from app import app
@@ -47,7 +48,7 @@ def search_advance():
         }
     }
     res = es.search(index="cv", body=body)
-    print(res)
+    print(str(datetime.now())+": search Advance successfull!")
     return make_response(jsonify({"res":res['hits']['hits']}))
 
 
@@ -59,6 +60,7 @@ def haystack_search():
     except:
         print("haystackData null")
     res = cv_search_haystack.search_cv(query)
+    print(str(datetime.now())+": search Haystack successfull!")
     return make_response(jsonify({'status':200,'result':res}))
     
 import os
