@@ -40,7 +40,7 @@ def search_advance():
         conditions.append({"match":{key:request.json[key]}})
     body = {
     "from":0,
-    "size":3000,
+    "size":100,
     "query": {
         "bool": {
           "must": conditions
