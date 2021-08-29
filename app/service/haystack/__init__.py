@@ -16,9 +16,9 @@ Esusername = ''
 Espassword = ''
 region = 'ap-southeast-1'
 # awsauth = AWS4Auth(access_key, serect_key,region,service)
-
+end_point = 'search-cv-seach-ivbbp5chxthi4b3w452jlsepju.ap-southeast-1.es.amazonaws.com'
 
 farm_reader = FARMReader(model_name_or_path = model_path,use_gpu=False,num_processes=1)
 from haystack.document_store.elasticsearch import ElasticsearchDocumentStore
 
-document_store = ElasticsearchDocumentStore(host="search-cvseach-vxtflrioygvpezxwkczdpe5cfe.ap-southeast-1.es.amazonaws.com",port=443,username=Esusername, password=Espassword, scheme='https',index="document",embedding_field=None)
+document_store = ElasticsearchDocumentStore(host=end_point,port=443,username=Esusername, password=Espassword, scheme='https',index="document",embedding_field=None)
